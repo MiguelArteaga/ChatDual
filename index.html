@@ -13,8 +13,17 @@
       #messages li:nth-child(odd) { background: #eee; }
     </style>
   </head>
-  <body>
+  <body onload="alerta()">
     <ul id="messages"></ul>
+    <script type="text/javascript">
+      var nombre;
+      var socket = io();
+      function alerta(){
+        nombre = prompt("Nombre de usuario");
+        socket.emit('chat message',nombre.concat(" Bienvenido "));
+      }
+      
+    </script>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
@@ -30,7 +39,7 @@
     var socket = io();
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
-      socket.emit('chat message', $('#m').val());
+      socket.emit('chat message',nombre.concat(": ", $('#m').val()));
       $('#m').val('');
       return false;
     });
@@ -49,5 +58,6 @@
       $('#messages').append($('<li>').text(msg));
     });
   });
+
 </script>
 </html>
