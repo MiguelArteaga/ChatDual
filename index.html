@@ -17,7 +17,6 @@
     <ul id="messages"></ul>
     <script type="text/javascript">
       var nombre;
-      var socket = io();
       function alerta(){
         nombre = prompt("Nombre de usuario");
         socket.emit('chat message',nombre.concat(" Bienvenido "));
